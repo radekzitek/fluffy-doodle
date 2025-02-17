@@ -38,12 +38,13 @@ LOGGING = {
 
     "formatters": {
         "simple": {
-            "format": "%(asctime)s %(levelname)s %(message)s",
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         },
     },
 
     "handlers": {
         "console": {
+            "level": "ERROR",
             "class": "logging.StreamHandler",
         },
         "file": {
@@ -54,16 +55,29 @@ LOGGING = {
             "backupCount": 5,
             "formatter": "simple",
         },
+        "root_file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": os.path.join(BASE_DIR, "logs/root.log"),
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
+            "formatter": "simple",
+        },
+        "rollbar": {
+            "level": "WARNING",
+            "class": "rollbar.logger.RollbarHandler",
+        }
+
     },
 
     "loggers": {
         "django": {
-            "handlers": ["file", "console"],
+            "handlers": ["file", "console", "rollbar"],
             "level": "DEBUG",
             "propagate": False,
         },
         "": {
-            "handlers": ["file", "console"],
+            "handlers": ["root_file", "console"],
             "level": "DEBUG",
         },
     },
@@ -83,6 +97,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # ---------------------
     "apps.users",
+    "apps.metrics",
 ]
 
 MIDDLEWARE = [
@@ -93,7 +108,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
+
+ROLLBAR = {
+    'access_token': '8e0f81125a684b17b17cb6454c496cfb',
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
 
 ROOT_URLCONF = "fluffy.urls"
 
@@ -128,7 +151,7 @@ WSGI_APPLICATION = "fluffy.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": config("POSTGRES_DB", default="database"),
         "USER": config("POSTGRES_USER", default="user"),
         "PASSWORD": config("POSTGRES_PASSWORD", default="password"),
