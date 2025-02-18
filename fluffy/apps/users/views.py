@@ -1,4 +1,5 @@
-# from django.shortcuts import render
+from django.shortcuts import render  # noqa	F401
+
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
