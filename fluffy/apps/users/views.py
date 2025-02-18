@@ -1,13 +1,11 @@
 from django.shortcuts import render  # noqa	F401
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator  # noqa	F401
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model  # noqa	F401
 import json
+from .decorators import require_authentication
 
 
 @csrf_exempt
@@ -55,7 +53,7 @@ def register_user(request):
         return JsonResponse({"error": "Invalid JSON"}, status=400)
 
 
-@login_required
+@require_authentication
 @require_GET
 def get_user_profile(request):
     user = request.user
@@ -70,7 +68,7 @@ def get_user_profile(request):
     return JsonResponse(profile_data, status=200)
 
 
-@login_required
+@require_authentication
 @csrf_exempt
 @require_http_methods(["PATCH", "PUT"])
 def update_user_profile(request):
