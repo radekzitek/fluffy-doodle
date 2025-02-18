@@ -54,6 +54,7 @@ def register_user(request):
 
 
 @require_authentication
+@csrf_exempt
 @require_GET
 def get_user_profile(request):
     user = request.user
