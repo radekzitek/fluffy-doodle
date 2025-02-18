@@ -23,4 +23,5 @@ handler404 = 'fluffy.views.custom_404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('metrics/', include('apps.metrics.urls')),
+    path('users/', include('apps.users.urls')),
 ]

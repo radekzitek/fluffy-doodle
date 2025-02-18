@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     # ---------------------
     "apps.users",
     "apps.metrics",
+    "apps.oauth",
 ]
 
 MIDDLEWARE = [
