@@ -35,13 +35,11 @@ DEBUG = True
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-
     "formatters": {
         "simple": {
             "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         },
     },
-
     "handlers": {
         "console": {
             "level": "ERROR",
@@ -66,10 +64,8 @@ LOGGING = {
         "rollbar": {
             "level": "WARNING",
             "class": "rollbar.logger.RollbarHandler",
-        }
-
+        },
     },
-
     "loggers": {
         "django": {
             "handlers": ["file", "console", "rollbar"],
@@ -101,6 +97,13 @@ INSTALLED_APPS = [
     "apps.oauth",
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    # Add other authentication backends if needed
+]
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -109,14 +112,14 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
 ]
 
 ROLLBAR = {
-    'access_token': '8e0f81125a684b17b17cb6454c496cfb',
-    'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
-    'root': BASE_DIR,
+    "access_token": "8e0f81125a684b17b17cb6454c496cfb",
+    "environment": "development" if DEBUG else "production",
+    "code_version": "1.0",
+    "root": BASE_DIR,
 }
 
 ROOT_URLCONF = "fluffy.urls"
@@ -124,7 +127,7 @@ ROOT_URLCONF = "fluffy.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

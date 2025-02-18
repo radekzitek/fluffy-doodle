@@ -248,11 +248,12 @@ For an OAuth2 JWT-based user authentication backend, here's a typical set of end
 
 1. Get User Profile Information - /users/me/ or /users/profile/ (GET)
 
-Purpose: Retrieve the profile information of the currently logged-in user.
-HTTP Method: GET
-Authentication: Requires a valid access token (user must be logged in).
-Successful Response (200 OK):
-JSON
+- Purpose: Retrieve the profile information of the currently logged-in user.
+- HTTP Method: GET
+- Authentication: Requires a valid access token (user must be logged in).
+- Successful Response (200 OK):
+
+```JSON
 
 {
   "id": 123,
@@ -262,23 +263,30 @@ JSON
   "last_name": "Doe",
   // ... other profile fields ...
 }
-Error Responses (401 Unauthorized):
-401 Unauthorized: Invalid or missing access token.
-Update User Profile Information - /users/me/ or /users/profile/ (PATCH/PUT)
+```
 
-Purpose: Update the profile information of the currently logged-in user.
-HTTP Method: PATCH (for partial updates - recommended) or PUT (for full updates)
-Request Body (JSON - fields to update):
-JSON
+- Error Responses (401 Unauthorized):
+- 401 Unauthorized: Invalid or missing access token.
+
+2. Update User Profile Information - /users/me/ or /users/profile/ (PATCH/PUT)
+
+- Purpose: Update the profile information of the currently logged-in user.
+- HTTP Method: PATCH (for partial updates - recommended) or PUT (for full updates)
+- Request Body (JSON - fields to update):
+
+```JSON
 
 {
   "first_name": "Johnny",
   "profile_picture": "url_to_new_picture.jpg"
   // ... other profile fields to update ...
 }
-Authentication: Requires a valid access token (user must be logged in).
-Successful Response (200 OK):
-JSON
+```
+
+- Authentication: Requires a valid access token (user must be logged in).
+- Successful Response (200 OK):
+
+```JSON
 
 {
   "message": "Profile updated successfully.",
@@ -289,22 +297,31 @@ JSON
   "last_name": "Doe",
   // ... updated profile fields ...
 }
-Error Responses (400 Bad Request, 401 Unauthorized):
-400 Bad Request: Invalid input data, validation errors.
-401 Unauthorized: Invalid or missing access token.
-Endpoint Naming and Structure Considerations:
+```
 
-Base URL: You can choose a base URL prefix for your authentication endpoints, like /auth/ or /api/auth/.
+- Error Responses (400 Bad Request, 401 Unauthorized):
+- 400 Bad Request: Invalid input data, validation errors.
+- 401 Unauthorized: Invalid or missing access token.
+
+### Endpoint Naming and Structure Considerations:
+
+- Base URL: You can choose a base URL prefix for your authentication endpoints, like /auth/ or /api/auth/.
 Resource-Based Naming: Try to use resource-based naming (e.g., /users/, /auth/token/, /auth/password/) to make your API more RESTful and understandable.
-me Endpoint: Using /users/me/ or /profile/me/ is a common convention for accessing the profile of the currently authenticated user, as it's relative to the user's context.
+
+- me Endpoint: Using /users/me/ or /profile/me/ is a common convention for accessing the profile of the currently authenticated user, as it's relative to the user's context.
 HTTP Methods: Use appropriate HTTP methods (POST for creation, GET for retrieval, PATCH/PUT for updates).
 Consistent Error Responses: Maintain a consistent format for error responses across your API.
 Security Considerations:
 
-HTTPS: Always use HTTPS in production to encrypt communication, especially for authentication-related endpoints.
-Rate Limiting: Implement rate limiting on login, registration, password reset request endpoints to prevent brute-force attacks.
-Input Validation: Thoroughly validate all user inputs on the server-side to prevent injection vulnerabilities and data integrity issues.
-Strong Password Policies: Enforce strong password policies (minimum length, complexity) during registration and password changes.
-JWT Security: Use a strong secret key for JWT signing, protect your secret key, and consider appropriate JWT expiration times (access tokens should be short-lived, refresh tokens can be longer-lived but should be revocable).
+- HTTPS: Always use HTTPS in production to encrypt communication, especially for authentication-related endpoints.
+
+- Rate Limiting: Implement rate limiting on login, registration, password reset request endpoints to prevent brute-force attacks.
+
+- Input Validation: Thoroughly validate all user inputs on the server-side to prevent injection vulnerabilities and data integrity issues.
+
+- Strong Password Policies: Enforce strong password policies (minimum length, complexity) during registration and password changes.
+
+- JWT Security: Use a strong secret key for JWT signing, protect your secret key, and consider appropriate JWT expiration times (access tokens should be short-lived, refresh tokens can be longer-lived but should be revocable).
 CORS Configuration: Configure CORS (Cross-Origin Resource Sharing) properly to allow requests only from your authorized frontend origins.
-This set of endpoints provides a solid foundation for user account management in an OAuth2 JWT-based authentication system for your backend. You can adjust or extend these endpoints based on the specific features and security requirements of your web application.
+
+- This set of endpoints provides a solid foundation for user account management in an OAuth2 JWT-based authentication system for your backend. You can adjust or extend these endpoints based on the specific features and security requirements of your web application.

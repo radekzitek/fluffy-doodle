@@ -1,5 +1,5 @@
 from django.shortcuts import render  # noqa	F401
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model # noqa	F401
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -13,7 +13,6 @@ import datetime
 
 
 SECRET_KEY = settings.SECRET_KEY
-User = get_user_model()  # noqa F811
 
 
 def generate_jwt(user):
@@ -37,9 +36,8 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             access_token = generate_jwt(user)
-            refresh_token = generate_jwt(
-                user
-            )  # In a real application, use a different method for refresh tokens
+            refresh_token = generate_jwt(user)
+            # In a real application, use a different method for refresh tokens
             return JsonResponse(
                 {
                     "access_token": access_token,
