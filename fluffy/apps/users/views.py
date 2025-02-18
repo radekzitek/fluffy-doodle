@@ -6,8 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import json
 
-# Create your views here.
-
 
 @csrf_exempt
 @require_POST
