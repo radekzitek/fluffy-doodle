@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('metrics/', include('apps.metrics.urls')),
     path('users/', include('apps.users.urls')),
+    path('oauth/', include('apps.oauth.urls')),
 ]
