@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@primevue/themes':
+        specifier: ^4.2.5
+        version: 4.2.5
       primeflex:
         specifier: ^4.0.0
         version: 4.0.0
@@ -213,6 +216,10 @@ packages:
 
   '@primevue/icons@4.2.5':
     resolution: {integrity: sha512-WFbUMZhQkXf/KmwcytkjGVeJ9aGEDXjP3uweOjQZMmRdEIxFnqYYpd90wE90JE1teZn3+TVnT4ZT7ejGyEXnFQ==}
+    engines: {node: '>=12.11.0'}
+
+  '@primevue/themes@4.2.5':
+    resolution: {integrity: sha512-8F7yA36xYIKtNuAuyBdZZEks/bKDwlhH5WjpqGGB0FdwfAEoBYsynQ5sdqcT2Lb/NsajHmS5lc++Ttlvr1g1Lw==}
     engines: {node: '>=12.11.0'}
 
   '@rollup/rollup-android-arm-eabi@4.34.8':
@@ -558,6 +565,10 @@ snapshots:
       '@primevue/core': 4.2.5(vue@3.5.13)
     transitivePeerDependencies:
       - vue
+
+  '@primevue/themes@4.2.5':
+    dependencies:
+      '@primeuix/styled': 0.3.2
 
   '@rollup/rollup-android-arm-eabi@4.34.8':
     optional: true
