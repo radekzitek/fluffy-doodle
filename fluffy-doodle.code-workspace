@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "fluffy-doodle: vue-vueprime-1",
+			"path": "../fluffy-doodle.worktrees/vue-vueprime-1"
+		}
+	],
+	"settings": {}
+}
